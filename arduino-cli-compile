@@ -1,0 +1,15 @@
+#!/bin/bash
+
+sketch_folder=$1
+
+if [ "$sketch_folder" != "" ]; then
+    if [ ! -f "$sketch_folder/project.yaml" ]; then
+        echo "Specification file project.yaml not found in $sketch_folder"
+        exit 1
+    fi
+    docker run -it --rm \
+        -v "$sketch_folder":/usr/src/sketch \
+        macroyau/arduino-cli-compile
+else
+    echo "Usage: arduino-cli-compile path/to/sketch/folder"
+fi

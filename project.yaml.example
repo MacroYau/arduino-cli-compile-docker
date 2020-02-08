@@ -1,0 +1,9 @@
+sketch: Blink.ino
+version: 1.0.0
+
+target:
+  core: arduino:samd
+  board: arduino:samd:mkrzero
+
+libraries:
+  - Arduino Low Power==1.2.1
