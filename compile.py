@@ -29,7 +29,8 @@ def compile_sketch(spec):
             _add_arduino_core_package_index(spec["target"]["url"])
         if "core" in spec["target"]:
             (core_name, core_version) = _parse_version(spec["target"]["core"])
-            core_name_version = f"{core_name} v{core_version}" if core_version is not None else f"{core_name} (latest)"
+            core_name_version = f"{core_name} v{core_version}" \
+                if core_version is not None else f"{core_name} (latest)"
             print(f"Installing core {core_name_version}... ", end="")
             success = _install_arduino_core(core_name, core_version)
             print("Done!" if success else "Failed!")
@@ -39,7 +40,8 @@ def compile_sketch(spec):
     if "libraries" in spec:
         for lib in spec["libraries"]:
             (lib_name, lib_version) = _parse_version(lib)
-            lib_name_version = f"{lib_name} v{lib_version}" if lib_version is not None else f"{lib_name} (latest)"
+            lib_name_version = f"{lib_name} v{lib_version}" \
+                if lib_version is not None else f"{lib_name} (latest)"
             print(f"Installing library {lib_name_version}... ", end="")
             success = _install_arduino_lib(lib_name, lib_version)
             print("Done!" if success else "Failed!")
@@ -67,7 +69,8 @@ def _parse_version(line):
 
 
 def _add_arduino_core_package_index(url):
-    return _run_shell_command(["arduino-cli", "core", "update-index", "--additional-urls", url])
+    return _run_shell_command(["arduino-cli", "core", "update-index",
+                               "--additional-urls", url])
 
 
 def _install_arduino_core(name, version=None):
@@ -89,7 +92,7 @@ def _compile_arduino_sketch(sketch_path, board, output_path):
 
 
 def _run_shell_command(arguments, stdout=False, stderr=True):
-    process = subprocess.run(arguments, check=True, capture_output=True)
+    process = subprocess.run(arguments, check=False, capture_output=True)
     if stdout and len(process.stdout) > 0:
         print("> %s" % process.stdout.decode("utf-8"))
     if stderr and len(process.stderr) > 0:
