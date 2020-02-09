@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sketch_folder=$1
+sketch_folder=$(cd "$1" && pwd -P)
 
 if [ "$sketch_folder" != "" ]; then
     if [ ! -f "$sketch_folder/project.yaml" ]; then
