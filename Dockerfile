@@ -1,4 +1,4 @@
-FROM python:3.7-slim
+FROM python:3.9-slim
 
 RUN apt-get update && apt-get install -y curl
 RUN curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=/usr/bin sh
